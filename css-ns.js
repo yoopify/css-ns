@@ -75,7 +75,7 @@ function createReact(options, ns) {
   return Object.create(opt.React, { // inherit everything from standard React
     createElement: { // ...except hijack createElement()
       value: function(_, props) {
-        if (props) props.className = ns(props.className);
+        if (props && _.toString() !== 'Symbol(react.fragment)') props.className = ns(props.className);
         return opt.React.createElement.apply(opt.React, arguments);
       }
     }
